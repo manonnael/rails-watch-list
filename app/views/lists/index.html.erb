@@ -3,15 +3,24 @@
   <%=link_to "Create new list", new_list_path, class:"btn btn-primary mb-3" %>
   <ul>
       <% @lists.each do |list| %>
-        <div class="card m-4 w-75 h-40 p-4" style="width: 18rem;">
-            <h3><%=link_to list.name, list_path(list)%></h3>
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <div class="img-fluid rounded-start">
+                <% if list.photo.attached?%>
+                  <%= cl_image_tag list.photo.key, height: 80, width: 150, crop: :fill %>
+                <% else %>
+                  <%= "No photo" %>
+                <% end  %>
+                </div>
+              </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title no-text-deco"><%=link_to list.name, list_path(list)%></h5>
+              </div>
+            </div>
+          </div>
         </div>
       <% end %>
   </ul>
-  <%= cl_image_tag("THE_IMAGE_ID_FROM_LIBRARY",
-      width: 400, height: 300, crop: :fill) %>
-
-<!-- for face detection -->
-<%= cl_image_tag("IMAGE_WITH_FACE_ID",
-      width: 150, height: 150, crop: :thumb, gravity: :face) %>
 </div>
